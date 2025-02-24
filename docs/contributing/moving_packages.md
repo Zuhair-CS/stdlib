@@ -195,7 +195,7 @@ If that file includes an exported symbol from the original package, remove it. F
 
 Next, open the `docs/types/index.d.ts` file found in the parent namespace of the original package (e.g., `lib/node_modules/@stdlib/stats/base/docs/types/index.d.ts`).
 
-If that file includes an exported symbol from the origin package, remove it. For example,
+If that file includes an exported symbol from the original package, remove it. For example,
 
 ```diff
 - import dmax = require( '@stdlib/stats/base/dmax' );
