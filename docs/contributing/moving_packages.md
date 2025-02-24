@@ -198,7 +198,7 @@ Next, open the `docs/types/index.d.ts` file found in the parent namespace of the
 If that file includes an exported symbol from the origin package, remove it. For example,
 
 ```diff
-- import dmax = require( '@stdlib/stats/strided/dmax' );
+- import dmax = require( '@stdlib/stats/base/dmax' );
 ```
 
 and
