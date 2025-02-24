@@ -177,6 +177,8 @@ Ref: https://github.com/stdlib-js/stdlib/issues/4797
 
 ### 6. Remove the export of the original package from its parent namespace
 
+#### a. Namespace exports
+
 Next, open the `lib/index.js` file found in the parent namespace of the original package (e.g., `lib/node_modules/@stdlib/stats/base/lib/index.js`).
 
 If that file includes an exported symbol from the original package, remove it. For example,
@@ -192,6 +194,8 @@ If that file includes an exported symbol from the original package, remove it. F
 - */
 - setReadOnly( ns, 'dmax', require( '@stdlib/stats/base/dmax' ) );
 ```
+
+#### b. Namespace TypeScript declarations
 
 Next, open the `docs/types/index.d.ts` file found in the parent namespace of the original package (e.g., `lib/node_modules/@stdlib/stats/base/docs/types/index.d.ts`).
 
