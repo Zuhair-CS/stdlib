@@ -210,7 +210,7 @@ and
 -    * @param N - number of indexed elements
 -    * @param x - input array
 -    * @param strideX - stride length
--    * @returns minimum value
+-    * @returns maximum value
 -    *
 -    * @example
 -    * var Float64Array = require( '@stdlib/array/float64' );
