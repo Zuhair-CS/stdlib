@@ -18,11 +18,11 @@
 
 # Script to check whether a PR references an issue with label "Good First Issue".
 #
-# Usage: references_good_first_issue PR_NUMBER
+# Usage: references_good_first_issue <pr_number>
 #
 # Arguments:
 #
-#   PR_NUMBER    Pull request number.
+#   pr_number    Pull request number.
 #
 # Environment variables:
 #
@@ -34,19 +34,15 @@ set -o pipefail
 
 # VARIABLES #
 
-# Get the pull request number:
+# Resolve the pull request number:
 pr_number="$1"
 
 # GitHub API base URL:
-GITHUB_API_URL="https://api.github.com"
+github_api_url="https://api.github.com"
 
 # Repository owner and name:
-REPO_OWNER="stdlib-js"
-REPO_NAME="stdlib"
-
-# Exit codes:
-SUCCESS=0
-ERROR=1
+repo_owner="stdlib-js"
+repo_name="stdlib"
 
 
 # FUNCTIONS #
@@ -59,7 +55,7 @@ on_error() {
 	exit "$1"
 }
 
-# Makes GitHub API requests.
+# Performs a GitHub API request.
 #
 # $1 - HTTP method (GET or POST)
 # $2 - API endpoint
@@ -73,66 +69,71 @@ github_api() {
 	local headers=()
 
 	# If GITHUB_TOKEN is set, add the Authorization header:
-	if [ -n "$GITHUB_TOKEN" ]; then
-		headers+=("-H" "Authorization: token $GITHUB_TOKEN")
+	if [ -n "${GITHUB_TOKEN}" ]; then
+		headers+=("-H" "Authorization: token ${GITHUB_TOKEN}")
 	fi
 
 	# Determine the HTTP method and construct the curl command accordingly...
-	case "$method" in
+	case "${method}" in
 		GET)
-			curl -s "${headers[@]}" "$GITHUB_API_URL$endpoint"
+			curl -s "${headers[@]}" "${github_api_url}${endpoint}"
 			;;
 		POST)
 			# For POST requests, always set the Content-Type header:
 			headers+=("-H" "Content-Type: application/json")
 
 			# If data is provided, include it in the request:
-			if [ -n "$data" ]; then
-				curl -s -X POST "${headers[@]}" -d "$data" "$GITHUB_API_URL$endpoint"
+			if [ -n "${data}" ]; then
+				curl -s -X POST "${headers[@]}" -d "${data}" "${github_api_url}${endpoint}"
 			else
 				# Handle cases where POST data is required but not provided:
-				echo "POST request requires data."
-				on_error $ERROR
+				echo "ERROR: POST request requires data."
+				on_error 1
 			fi
 			;;
 		*)
-			echo "Invalid HTTP method: $method"
-			on_error $ERROR
+			echo "ERROR: Invalid HTTP method: ${method}."
+			on_error 1
 			;;
 	esac
 }
 
 # Main execution sequence.
 main() {
-	if [ -z "$pr_number" ]; then
-		echo "ERROR: Pull request number is required" >&2
-		on_error $ERROR
+	local issue_numbers
+	local issue_details
+	local pr_details
+	local pr_body
+	local issue
+	local bool
+
+	if [ -z "${pr_number}" ]; then
+		echo "ERROR: Pull request number is required." >&2
+		on_error 1
 	fi
 
 	# Fetch pull request details:
-	pr_details=$(github_api "GET" "/repos/$REPO_OWNER/$REPO_NAME/pulls/$pr_number")
-	pr_title=$(echo "$pr_details" | jq -r '.title')
-	pr_body=$(echo "$pr_details" | jq -r '.body')
+	pr_details=$(github_api "GET" "/repos/${repo_owner}/${repo_name}/pulls/${pr_number}")
+	pr_body=$(echo "${pr_details}" | jq -r '.body')
 
-	issue_numbers=$(echo $pr_body | grep -Ei '#[0-9]+' | grep -oEi '[0-9]+' | sort | uniq)
-	if [ -z "$issue_numbers" ]; then
+	issue_numbers=$(echo "${pr_body}" | grep -Ei '#[0-9]+' | grep -oEi '[0-9]+' | sort | uniq)
+	if [ -z "${issue_numbers}" ]; then
 		echo 'false'
-		exit $SUCCESS
+		exit 0
 	fi
 
-	for issue in $issue_numbers; do
-		issue_details=$(github_api "GET" "/repos/$REPO_OWNER/$REPO_NAME/issues/$issue")
+	for issue in ${issue_numbers}; do
+		issue_details=$(github_api "GET" "/repos/${repo_owner}/${repo_name}/issues/${issue}")
 
-		bool=$(echo $issue_details | jq '.labels | any(.name == "Good First Issue")')
-		if [ "$bool" == 'true' ]; then
+		bool=$(echo "${issue_details}" | jq '.labels | any(.name == "Good First Issue")')
+		if [ "${bool}" == 'true' ]; then
 			echo 'true'
-			exit $SUCCESS
+			exit 0
 		fi
 	done
 
 	echo 'false'
-	exit $SUCCESS
+	exit 0
 }
 
-# Call main with all command-line arguments:
-main "$@"
+main
