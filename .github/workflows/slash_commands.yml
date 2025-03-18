@@ -82,7 +82,7 @@ jobs:
               await github.rest.issues.createComment({
                 'owner': context.repo.owner,
                 'repo': context.repo.repo,
-                'issue_number': github.event.issue.number,
+                'issue_number': context.issue.number,
                 'body': `${quote}\n\n@${context.payload.comment.user.login}, slash command not recognized. Please use \`/stdlib help\` to view available commands.`
               });
             }
