@@ -17,7 +17,7 @@
 */
 
 #include "stdlib/stats/strided/sstdevpn.h"
-#include "stdlib/stats/base/svariancepn.h"
+#include "stdlib/stats/strided/svariancepn.h"
 #include "stdlib/blas/base/shared.h"
 #include "stdlib/math/base/special/sqrtf.h"
 #include "stdlib/strided/base/stride2offset.h"
