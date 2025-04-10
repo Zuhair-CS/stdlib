@@ -55,6 +55,11 @@ jobs:
             .github/workflows/scripts
           sparse-checkout-cone-mode: false
 
+      # Setup a terminal session:
+      - name: 'Setup upterm session'
+        # Pin action to full length commit SHA
+        uses: lhotari/action-upterm@b0357f23233f5ea6d58947c0c402e0631bab7334 # v1.0.0
+
       # Run the script to check PRs for tracking issue closure:
       - name: 'Check PRs for tracking issue closure'
         run: |
