@@ -27,6 +27,7 @@
 # Environment variables:
 #
 #   GITHUB_TOKEN   GitHub token for authentication.
+#   DEBUG          Whether to enable verbose debug output. Default: `false`.
 
 # shellcheck disable=SC2153
 
@@ -68,14 +69,15 @@ comment_identifier="<!-- stdlib-bot-tracking-issue-closure-check -->"
 max_retries=3
 retry_delay=2
 
-# Debug mode (set to true for verbose output)
-debug=true
+# Debug mode controlled by environment variable (defaults to false if not set)
+debug="${DEBUG:-false}"
 
 
 # FUNCTIONS #
 
 # Debug logging function
 debug_log() {
+	# Only print debug messages if DEBUG environment variable is set to "true"
 	if [ "$debug" = true ]; then
 		echo "[DEBUG] $1" >&2
 	fi
