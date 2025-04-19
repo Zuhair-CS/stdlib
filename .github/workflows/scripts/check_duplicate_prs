@@ -166,7 +166,7 @@ extract_resolved_issues() {
 	fi
 
 	local issues
-	issues=$(echo "$body" | grep -Eio "(resolves|closes|close|fix|fixes|fixed|resolve)[[:space:]]*(#[0-9]+|https?://github\.com/stdlib-js/stdlib/issues/[0-9]+)" |
+	issues=$(echo "$body" | grep -Eio "(resolves|closes|close|fix|fixes|fixed|resolve)[[:space:]]*(#[0-9]+|https?://github\.com/${repo_owner}/${repo_name}/issues/[0-9]+)" |
 		grep -Eo "([0-9]+)$" | sort -u)
 
 	debug_log "Extracted issues: $issues"
@@ -181,7 +181,11 @@ remove_label() {
 	local pr_number="$1"
 	local label="$2"
 
-	github_api "DELETE" "/repos/${repo_owner}/${repo_name}/issues/${pr_number}/labels/${label}" || true
+	# URL encode the label name by replacing spaces with %20:
+	local encoded_label="${label// /%20}"
+
+	debug_log "Removing label '${label}' from PR #${pr_number}"
+	github_api "DELETE" "/repos/${repo_owner}/${repo_name}/issues/${pr_number}/labels/${encoded_label}"
 }
 
 # Main execution sequence.
@@ -218,14 +222,14 @@ main() {
 	done
 
 	# Check if we found any PRs:
-	pr_count=$(echo "$open_prs" | jq length)
-	if [ "$pr_count" -eq 0 ]; then
+	total_prs=$(echo "$open_prs" | jq length)
+	if [ "$total_prs" -eq 0 ]; then
 		echo "No open pull requests found."
 		print_success
 		exit 0
 	fi
 
-	echo "Found ${pr_count} open pull requests."
+	echo "Found ${total_prs} open pull requests."
 
 	# Create arrays to store mappings and track labeled PRs:
 	declare -a issue_prs_keys
@@ -251,11 +255,10 @@ main() {
 
 	# Process each PR to build issue mappings:
 	echo "Processing PRs for issue references..."
-	debug_log "Starting to process $pr_count PRs for issue references"
+	debug_log "Starting to process $total_prs PRs for issue references"
 
 	# Process PRs one by one...
-	pr_count=0
-	total_prs=$(echo "$open_prs" | jq length)
+	processed_count=0
 
 	for ((i=0; i<total_prs; i++)); do
 		pr=$(echo "$open_prs" | jq -c ".[$i]")
@@ -275,9 +278,9 @@ main() {
 		pr_body=$(echo "$pr" | jq -r '.body // ""')
 		resolved_issues=$(extract_resolved_issues "$pr_body")
 
-		pr_count=$((pr_count + 1))
-		if [ $((pr_count % 50)) -eq 0 ]; then
-			echo "Processed ${pr_count} PRs..."
+		processed_count=$((processed_count + 1))
+		if [ $((processed_count % 50)) -eq 0 ]; then
+			echo "Processed ${processed_count} PRs..."
 		fi
 
 		for issue in $resolved_issues; do
@@ -317,8 +320,8 @@ main() {
 		fi
 	done
 
-	debug_log "PRs that should have label: ${should_be_labeled_list[*]}"
-	debug_log "PRs that currently have label: ${labeled_prs_list[*]}"
+	debug_log "PRs that should have label: ${should_be_labeled_list[*]:-none}"
+	debug_log "PRs that currently have label: ${labeled_prs_list[*]:-none}"
 
 	for pr in "${labeled_prs_list[@]}"; do
 		echo "Checking if PR #${pr} should still have label..."
