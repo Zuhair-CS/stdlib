@@ -169,7 +169,10 @@ main() {
 	# Process each PR to build issue mappings:
 	echo "Processing PRs for issue references..."
 	pr_count=0
-	while IFS= read -r pr; do
+
+	total_prs=$(echo "$open_prs" | jq 'length')
+	for i in $(seq 0 $((total_prs-1))); do
+		pr=$(echo "$open_prs" | jq -c ".[$i]")
 		pr_number=$(echo "$pr" | jq -r '.number')
 		pr_body=$(echo "$pr" | jq -r '.body')
 		resolved_issues=$(extract_resolved_issues "$pr_body")
@@ -182,9 +185,9 @@ main() {
 		for issue in $resolved_issues; do
 			# Find existing issue index
 			index=-1
-			for i in "${!issue_prs_keys[@]}"; do
-				if [ "${issue_prs_keys[$i]}" = "$issue" ]; then
-					index=$i
+			for j in "${!issue_prs_keys[@]}"; do
+				if [ "${issue_prs_keys[$j]}" = "$issue" ]; then
+					index=$j
 					break
 				fi
 			done
@@ -195,7 +198,7 @@ main() {
 				issue_prs_values[index]="${issue_prs_values[index]} $pr_number"
 			fi
 		done
-	done < <(echo "${open_prs}" | jq -c '.[]')
+	done
 
 	# Process the mappings to find duplicates:
 	declare -a should_be_labeled_list
