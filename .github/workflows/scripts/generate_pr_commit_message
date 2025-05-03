@@ -226,10 +226,6 @@ main() {
 		# Resolve name and email using .mailmap:
 		resolved_author=$(resolve_name_email "$name" "$email")
 
-
-		echo $resolved_email
-		echo $pr_author_emails
-
 		# Skip if the resolved commit author's email matches any of the resolved PR author's emails:
 		resolved_email=$(echo "$resolved_author" |
 			sed -E 's/^.*<([^>]+)>.*/\1/' |
