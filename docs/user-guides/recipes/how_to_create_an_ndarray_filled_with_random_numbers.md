@@ -18,11 +18,13 @@ limitations under the License.
 
 -->
 
-# How to create ndarrays of random numbers
+# How to create an ndarray filled with random numbers
+
+> Create an ndarray of uniformly-distributed pseudorandom numbers (with optional reproducibility via a seed).
 
 ## Introduction
 
-stdlib provides elegantly designed APIs and packages to help you create multi-dimensional arrays (a.k.a., ndarrays) containing pseudorandom numbers drawn from statistical distributions. These APIs allow you to specify seeds in order to generate reproducible sequences and to specify the output array shape and precision.
+stdlib provides APIs and packages to help you create multi-dimensional arrays (a.k.a., ndarrays) containing pseudorandom numbers drawn from statistical distributions. These APIs allow you to specify seeds in order to generate reproducible sequences and to specify the output array shape and precision.
 
 In this recipe, we will use [`@stdlib/random/uniform`][@stdlib/random/uniform] to create ndarrays containing pseudorandom numbers drawn from a uniform distribution.
 
@@ -40,7 +42,7 @@ $ npm install @stdlib/stdlib
 2.  Create a multi-dimensional array.
 3.  \[Optional] Regenerate a sequence by using a seed.
 
-### 1. Import necessary packages for generating pseudorandom numbers
+### 1. Import required packages
 
 For this recipe, we will use `@stdlib/stdlib` and its package [`@stdlib/random/uniform`][@stdlib/random/uniform]. We will also use the package [`@stdlib/ndarray/to-array`][@stdlib/ndarray/to-array] to convert an ndarray to a conventional array-of-arrays format.
 
@@ -61,9 +63,9 @@ For this recipe, the uniform distribution has two parameters:
 In the following code snippet, we generate a 3x3 matrix of pseudorandom numbers sampled from a uniform distribution with minimum support `-10` and maximum support `+10`.
 
 ```javascript
-const shape = [ 3, 3 ];
-const a = -10.0;
-const b = 10.0;
+const shape = [ 3, 3 ]; // 3x3
+const a = -10.0;        // minimum support
+const b = 10.0;         // maximum support
 
 const x = uniform( shape, a, b );
 // returns <ndarray>
@@ -77,6 +79,16 @@ const xa = ndarray2array( x );
 ```
 
 The output displayed in the above example is representative, and your values are likely to differ. However, notice that, even after running the example multiple times, the values always reside on the half-open interval `[-10,10)`, as expected based on the parameterization we used above.
+
+> 💡 Tip
+>
+> By default, `uniform` returns an ndarray having a `float64` data type (i.e., an ndarray of double-precision floating-point numbers). To return an ndarray having either a `float32` or `generic` data type, you can provide a `dtype` option when calling `uniform`.
+>
+> ```javascript
+> const x32 = uniform( shape, a, b, {
+>     'dtype': 'float32'
+> });
+> ```
 
 At this point, we have finished creating an ndarray of pseudorandom numbers, and, now, we will reproduce the same sequence of numbers by using a seed.
 
