@@ -129,7 +129,7 @@ Congratulations! You have successfully used stdlib to generate (and re-generate)
 
 Check out our other [recipes][stdlib-user-guides-recipes] to continue your learning!
 
-Sampling other distributions? See [`@stdlib/random`][@stdlib/random] for all of what stdlib has to offer!
+Sampling other distributions? See [`@stdlib/random`][@stdlib/random] for all of what stdlib has to offer.
 
 <!-- links -->
 
