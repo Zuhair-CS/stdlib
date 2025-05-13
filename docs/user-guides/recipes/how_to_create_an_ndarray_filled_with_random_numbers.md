@@ -118,7 +118,7 @@ const r2 = uniform.factory({
     'copy': true              // set to `false` to share state
 });
 
-// Generate the same sequence of values as if calling `uniform` a second ndarray:
+// Generate the same sequence of values as if calling `uniform` a second time:
 const z = r2( shape, a, b );
 // returns <ndarray>
 ```
