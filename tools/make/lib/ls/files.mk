@@ -52,10 +52,10 @@ FILES ?= $(shell $(FIND_FILES_CMD))
 # make list-files
 #
 # @example
-# make list-files FILES_FILTER=".*/math/base/special/abs/.*"
+# make list-files FILES_FILTER='.*/math/base/special/abs/.*'
 #
 # @example
-# make list-files FILES_FILTER=".*/math/base/special/abs/.*" FILES_PATTERN="*.js"
+# make list-files FILES_FILTER='.*/math/base/special/abs/.*' FILES_PATTERN='*.js'
 list-files:
 	$(QUIET) find $(find_kernel_prefix) $(ROOT_DIR) $(FIND_FILES_FLAGS) $(find_print_list)
 
