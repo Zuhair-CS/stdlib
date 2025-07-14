@@ -52,12 +52,10 @@ if [ -n "${files}" ]; then
 	printf '%s' "${files}" | "${lint_package_json}" --split=" "
 
 	echo "Validating package names..."
-	for file in ${files}; do
-		if ! node "${validate_package_names}" --pattern "${file}"; then
-			echo "ERROR: Package name validation failed"
-			needs_changes=1
-		fi
-	done
+	if ! printf '%s' "${files}" | "${validate_package_names}" --split=" "; then
+		echo "ERROR: Package name validation failed"
+		needs_changes=1
+	fi
 else
 	echo "No package.json files to lint."
 fi
