@@ -1,7 +1,7 @@
 #/
 # @license Apache-2.0
 #
-# Copyright (c) 2023 The Stdlib Authors.
+# Copyright (c) 2025 The Stdlib Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 #/
 
 # Workflow name:
-name: random_examples
+name: random_benchmarks
 
 # Workflow triggers:
 on:
@@ -36,11 +36,11 @@ permissions:
 # Workflow jobs:
 jobs:
 
-  # Define a job for running random examples...
+  # Define a job for running random benchmarks...
   process:
 
     # Define a display name:
-    name: 'Run random examples'
+    name: 'Run random benchmarks'
 
     # Ensure the job does not run on forks:
     if: github.repository == 'stdlib-js/stdlib'
@@ -82,14 +82,14 @@ jobs:
           make install-node-modules || make install-node-modules || make install-node-modules
         timeout-minutes: 15
 
-      # Run JavaScript examples:
-      - name: 'Run JavaScript examples'
+      # Run JavaScript and native add-on benchmarks:
+      - name: 'Run JavaScript and native add-on benchmarks'
         run: |
-          make examples-random-javascript RANDOM_SELECTION_SIZE=50
+          make benchmarks-random-javascript RANDOM_SELECTION_SIZE=50 BUILD_ADDONS=1
         timeout-minutes: 60
 
-      # Run C examples:
-      - name: 'Run C examples'
+      # Run C benchmarks:
+      - name: 'Run C benchmarks'
         run: |
-          make examples-random-c RANDOM_SELECTION_SIZE=10
+          make benchmarks-random-c RANDOM_SELECTION_SIZE=10
         timeout-minutes: 60
