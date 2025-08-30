@@ -85,11 +85,11 @@ jobs:
       # Run JavaScript and native add-on benchmarks:
       - name: 'Run JavaScript and native add-on benchmarks'
         run: |
-          make benchmarks-random-javascript RANDOM_SELECTION_SIZE=50 BUILD_ADDONS=1
+          make benchmark-random-javascript RANDOM_SELECTION_SIZE=50 BUILD_ADDONS=1
         timeout-minutes: 60
 
       # Run C benchmarks:
       - name: 'Run C benchmarks'
         run: |
-          make benchmarks-random-c RANDOM_SELECTION_SIZE=10
+          make benchmark-random-c RANDOM_SELECTION_SIZE=10
         timeout-minutes: 60
