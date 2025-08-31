@@ -113,7 +113,7 @@ benchmark-c-files:
 # make benchmark-random-c RANDOM_SELECTION_SIZE=10
 #/
 benchmark-random-c: $(NODE_MODULES)
-	$(QUIET) make -s list-random-lib-pkgs PACKAGES_PATTERN='binding.gyp' | while read -r pkg; do \
+	$(QUIET) make -s list-random-lib-pkgs PACKAGES_PATTERN='manifest.json' | while read -r pkg; do \
 		echo ""; \
 		echo "Running benchmark: $$pkg"; \
 		NODE_ENV="$(NODE_ENV_BENCHMARK)" \
