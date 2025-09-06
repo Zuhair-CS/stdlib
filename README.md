@@ -79,7 +79,7 @@ Thank you for being a part of our community! Your support is invaluable to us!
 
 -   [**Google Calendar**][stdlib-public-calendar]: calendar of public events, including [open office hours][stdlib-office-hours].
 -   [**Open Collective**][open-collective-stdlib]: financially support the project.
--   [**Twitter**][stdlib-twitter]: follow us on social media.
+-   [**Bluesky**][stdlib-bluesky]: follow us on social media.
 -   [**Gitter**][stdlib-gitter]: chat with project maintainers and other community members.
 
 ## Features
@@ -838,7 +838,9 @@ Test and build infrastructure is generously provided by the following services:
 
 [open-collective-stdlib]: https://opencollective.com/stdlib
 
-[stdlib-twitter]: https://twitter.com/stdlibjs
+<!-- [stdlib-twitter]: https://twitter.com/stdlibjs -->
+
+[stdlib-bluesky]: https://bsky.app/profile/stdlib.io
 
 [stdlib-gitter]: https://gitter.im/stdlib-js/stdlib
 
