@@ -563,7 +563,7 @@ stdlib development is generously supported by the following sponsors:
 <div class="image" align="center">
     <br>
     <a href="https://labs.quansight.org/">
-        <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@2719e1d3ecab2cc29985bca35fd33594e65adb55/docs/assets/sponsors/quansight_labs_logo.png" alt="Quansight Labs">
+        <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@a064751967bcc3419f5877716b23cf5e1064ab26/docs/assets/sponsors/quansight_labs_logo.png" alt="Quansight Labs">
     </a>
     <br>
     <br>
