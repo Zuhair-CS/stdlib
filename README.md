@@ -615,7 +615,7 @@ This work was supported in part by the National Science Foundation under Award N
 <div class="image" align="center">
     <br>
     <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2449410&HistoricalAwards=false">
-        <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@a064751967bcc3419f5877716b23cf5e1064ab26/docs/assets/sponsors/nsf.png" alt="National Science Foundation">
+        <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@f0974a1ffc7093db96b160c1d14cf807fb6e8722/docs/assets/sponsors/nsf.png" alt="National Science Foundation">
     </a>
     <br>
     <br>
