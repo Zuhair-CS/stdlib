@@ -608,7 +608,7 @@ Does your organization use stdlib? If so, we'd love to hear from you!
 
 ## Funding Acknowledgments
 
-This work was supported in part by the National Science Foundation under Award No. 2449410.
+This work was supported in part by the National Science Foundation under [Award No. 2449410][nsf-award-2449410].
 
 > Disclaimer: Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
@@ -842,6 +842,8 @@ Test and build infrastructure is generously provided by the following services:
 [@stdlib/math-base-special-erf-esm]: https://github.com/stdlib-js/math-base-special-erf/tree/esm
 
 [@stdlib/math-base-special-erf-umd]: https://github.com/stdlib-js/math-base-special-erf/tree/umd
+
+[nsf-award-2449410]: https://www.nsf.gov/awardsearch/showAward?AWD_ID=2449410&HistoricalAwards=false
 
 </section>
 
