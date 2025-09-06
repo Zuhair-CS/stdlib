@@ -612,7 +612,7 @@ This work was supported in part by the National Science Foundation under Award N
 
 > Disclaimer: Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
-<div class="image" align="center" width="50">
+<div class="image" align="center" width="20">
     <br>
     <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2449410&HistoricalAwards=false">
         <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@886b0c645787542774d5bcefde429f6e3db59b57/docs/assets/sponsors/nsf.png" alt="National Science Foundation">
