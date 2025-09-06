@@ -600,6 +600,31 @@ Does your organization use stdlib? If so, we'd love to hear from you!
 
 <!-- /.users -->
 
+<!-- Project funding acknowledgments. If acknowledgments are included, add a horizontal rule *before* the section. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+
+* * *
+
+<section class="funding-acknowledgments">
+
+## Funding Acknowledgments
+
+This work was supported in part by the National Science Foundation under Award No. 2449410.
+
+> Disclaimer: Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+
+<div class="image" align="center">
+    <br>
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2449410&HistoricalAwards=false">
+        <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@a064751967bcc3419f5877716b23cf5e1064ab26/docs/assets/sponsors/nsf.png" alt="National Science Foundation">
+    </a>
+    <br>
+    <br>
+</div>
+
+</section>
+
+<!-- /.funding-acknowledgments -->
+
 * * *
 
 ## Governance
