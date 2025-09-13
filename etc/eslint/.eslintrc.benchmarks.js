@@ -125,3 +125,8 @@ eslint.rules[ 'stdlib/jsdoc-doctest' ] = 'off';
 * @private
 */
 eslint.rules[ 'stdlib/no-unnecessary-nested-functions' ] = 'off';
+
+
+// EXPORTS //
+
+module.exports = eslint;
