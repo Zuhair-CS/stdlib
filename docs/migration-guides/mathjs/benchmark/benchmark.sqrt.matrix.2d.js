@@ -121,7 +121,7 @@ bench( pkg+'::stdlib:ndarray/base/unary:value=ndarray,dtype=generic,size=10000,s
 		}
 	}
 	b.toc();
-	if ( isnan( y.get( 1, 1 ) ) || isnan( y.get( 98, 98) ) ) {
+	if ( isnan( y.get( 1, 1 ) ) || isnan( y.get( 98, 98 ) ) ) {
 		b.fail( 'should not return NaN' );
 	}
 	b.pass( 'benchmark finished' );
@@ -147,7 +147,7 @@ bench( pkg+'::stdlib:ndarray/map:value=ndarray,dtype=generic,size=10000,shape=(1
 		}
 	}
 	b.toc();
-	if ( isnan( y.get( 1, 1 ) ) || isnan( y.get( 98, 98) ) ) {
+	if ( isnan( y.get( 1, 1 ) ) || isnan( y.get( 98, 98 ) ) ) {
 		b.fail( 'should not return NaN' );
 	}
 	b.pass( 'benchmark finished' );
