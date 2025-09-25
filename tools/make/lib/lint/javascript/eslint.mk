@@ -250,16 +250,16 @@ endif
 # @example
 # make eslint-files FILES='/foo/index.js /bar/index.js'
 #/
-eslint-files: $(NODE_MODULES)
+eslint-src: $(NODE_MODULES)
 ifeq ($(FAIL_FAST), true)
-	$(QUIET) for file in $(FILES); do \
+	$(QUIET) $(FIND_SOURCES_CMD) | grep '^[\/]\|^[a-zA-Z]:[/\]' | grep -v '/node_modules/' | while read -r file; do \
 		echo ''; \
 		echo "Linting file: $$file"; \
 		$(ESLINT) $(eslint_flags) --config $(ESLINT_CONF) $$file || exit 1; \
 	done
 else
 	$(QUIET) status=0; \
-	for file in $(FILES); do \
+	$(FIND_SOURCES_CMD) | grep '^[\/]\|^[a-zA-Z]:[/\]' | grep -v '/node_modules/' | while read -r file; do \
 		echo ''; \
 		echo "Linting file: $$file"; \
 		if ! $(ESLINT) $(eslint_flags) --config $(ESLINT_CONF) $$file; then \
@@ -269,5 +269,6 @@ else
 	done; \
 	exit $$status;
 endif
+
 
 .PHONY: eslint-files
